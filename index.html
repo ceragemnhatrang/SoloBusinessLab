@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khóa Học AI Kinh Doanh Online | Làm Chủ Tương Lai</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --cream: #f5f0e8;
+    --gold: #c8a84b;
+    --gold-light: #e8d08a;
+    --rust: #c84b2f;
+    --sage: #4b7a5a;
+    --paper: #faf7f2;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 1.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(245, 240, 232, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200, 168, 75, 0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 0.65rem 1.5rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--gold); color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    margin-bottom: 2rem;
+    width: fit-content;
+    animation: fadeUp 0.8s 0.1s both;
+  }
+
+  .hero h1 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    animation: fadeUp 0.8s 0.2s both;
+  }
+
+  .hero h1 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .hero-sub {
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+    max-width: 480px;
+    animation: fadeUp 0.8s 0.3s both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    animation: fadeUp 0.8s 0.4s both;
+  }
+
+  .stat-num {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--ink);
+  }
+
+  .stat-num span { color: var(--gold); }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: #888;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 2.5rem;
+    animation: fadeUp 0.8s 0.5s both;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 1rem 2.5rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover::after { transform: scaleX(1); }
+  .btn-primary:hover { background: #1a1a1a; }
+
+  .btn-ghost {
+    color: var(--ink);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-visual {
+    width: 100%;
+    height: 100%;
+    background: var(--ink);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,168,75,0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,168,75,0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .hero-circle {
+    width: 380px;
+    height: 380px;
+    border-radius: 50%;
+    border: 2px solid rgba(200,168,75,0.3);
+    position: absolute;
+    animation: pulse-ring 3s ease-in-out infinite;
+  }
+
+  .hero-circle:nth-child(2) {
+    width: 280px; height: 280px;
+    border-color: rgba(200,168,75,0.5);
+    animation-delay: 0.5s;
+  }
+
+  .hero-circle:nth-child(3) {
+    width: 180px; height: 180px;
+    border-color: var(--gold);
+    animation-delay: 1s;
+  }
+
+  .hero-center-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 4rem;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .floating-card {
+    position: absolute;
+    background: rgba(245,240,232,0.95);
+    backdrop-filter: blur(8px);
+    padding: 1rem 1.4rem;
+    border-left: 3px solid var(--gold);
+    font-size: 0.8rem;
+    max-width: 200px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .floating-card strong {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+
+  .fc-1 { top: 20%; left: 5%; animation-delay: 0s; }
+  .fc-2 { bottom: 25%; right: 5%; animation-delay: 1.5s; }
+  .fc-3 { top: 60%; left: 3%; animation-delay: 0.7s; }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 6rem 5rem;
+    position: relative;
+  }
+
+  .section-tag {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    width: 30px; height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+
+  .section-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .section-title em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold);
+  }
+
+  /* ── PROBLEM ── */
+  .problem {
+    background: var(--ink);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .problem .section-tag { color: var(--gold); }
+
+  .problem-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .problem-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding: 1.4rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: border-color 0.3s;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.6s forwards;
+  }
+
+  .problem-item:nth-child(1) { animation-delay: 0.1s; }
+  .problem-item:nth-child(2) { animation-delay: 0.2s; }
+  .problem-item:nth-child(3) { animation-delay: 0.3s; }
+  .problem-item:nth-child(4) { animation-delay: 0.4s; }
+
+  .problem-item:hover { border-color: var(--gold); }
+
+  .prob-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .prob-text strong {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--cream);
+  }
+
+  .prob-text p {
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.6);
+    line-height: 1.6;
+  }
+
+  .problem-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .big-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    line-height: 1.3;
+    color: var(--cream);
+  }
+
+  .big-quote em { color: var(--gold); font-style: normal; }
+
+  .problem-p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.7);
+  }
+
+  /* ── SOLUTION ── */
+  .solution {
+    background: var(--cream);
+  }
+
+  .solution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+    border: 2px solid var(--ink);
+  }
+
+  .sol-card {
+    padding: 2.5rem 2rem;
+    border-right: 2px solid var(--ink);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .sol-card:last-child { border-right: none; }
+
+  .sol-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .sol-card:hover { background: var(--ink); }
+  .sol-card:hover * { color: var(--cream) !important; }
+  .sol-card:hover::before { transform: scaleX(1); }
+
+  .sol-num {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: rgba(0,0,0,0.06);
+    line-height: 1;
+    margin-bottom: 1rem;
+    transition: color 0.3s;
+  }
+
+  .sol-card:hover .sol-num { color: rgba(255,255,255,0.08) !important; }
+
+  .sol-icon { font-size: 1.8rem; margin-bottom: 1rem; }
+
+  .sol-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+  }
+
+  .sol-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #555;
+    transition: color 0.3s;
+  }
+
+  /* ── BENEFITS ── */
+  .benefits {
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .benefits-sticky {
+    position: sticky;
+    top: 120px;
+  }
+
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2rem;
+  }
+
+  .benefit-row {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    transition: all 0.3s;
+  }
+
+  .benefit-row:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+
+  .benefit-row:hover { padding-left: 1rem; }
+
+  .ben-num {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .ben-content strong {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .ben-content p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  .ben-tag {
+    display: inline-block;
+    background: var(--gold-light);
+    color: var(--ink);
+    font-size: 0.7rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.5rem;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials {
+    background: var(--ink);
+    color: var(--cream);
+    overflow: hidden;
+  }
+
+  .testi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .testi-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .testi-card:hover {
+    background: rgba(200,168,75,0.08);
+    border-color: rgba(200,168,75,0.3);
+    transform: translateY(-4px);
+  }
+
+  .testi-card.featured {
+    background: var(--gold);
+    border-color: var(--gold);
+    grid-row: span 1;
+  }
+
+  .testi-card.featured * { color: var(--ink) !important; }
+
+  .stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+
+  .testi-card.featured .stars { color: var(--ink); }
+
+  .testi-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-result {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .testi-result-label {
+    font-size: 0.75rem;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.5rem;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .testi-card.featured .testi-author { border-color: rgba(0,0,0,0.15); }
+
+  .author-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--ink);
+    flex-shrink: 0;
+  }
+
+  .testi-card.featured .author-avatar { background: var(--ink); color: var(--gold); }
+
+  .author-name {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  .author-role {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.5);
+  }
+
+  /* ── CURRICULUM STRIP ── */
+  .curriculum {
+    background: var(--cream);
+    padding: 4rem 5rem;
+  }
+
+  .curriculum-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .modules {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2rem;
+  }
+
+  .module {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: padding-left 0.3s;
+  }
+
+  .module:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+  .module:hover { padding-left: 0.5rem; }
+
+  .module-num {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+
+  .module-title {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .module-desc {
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.6;
+  }
+
+  /* ── PRICING / CTA ── */
+  .cta-section {
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .price-card {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .price-badge {
+    display: inline-block;
+    background: var(--rust);
+    color: white;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.35rem 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-original {
+    text-decoration: line-through;
+    color: rgba(245,240,232,0.4);
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .price-main {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-main sup {
+    font-size: 1.5rem;
+    vertical-align: super;
+    font-weight: 600;
+  }
+
+  .price-note {
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.5);
+    margin-bottom: 2rem;
+  }
+
+  .price-includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .price-includes li {
+    display: flex;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    color: rgba(245,240,232,0.8);
+  }
+
+  .price-includes li::before {
+    content: '✓';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .guarantee {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .guarantee-icon { font-size: 1.8rem; }
+
+  .guarantee-text { font-size: 0.8rem; color: rgba(245,240,232,0.6); line-height: 1.5; }
+  .guarantee-text strong { color: var(--cream); display: block; margin-bottom: 0.2rem; }
+
+  .btn-gold {
+    width: 100%;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 1.2rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-bottom: 1rem;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ── FAQ ── */
+  .faq {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  .faq-item:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+
+  .faq-q {
+    padding: 1.5rem 0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .faq-toggle {
+    width: 28px; height: 28px;
+    border: 1px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    color: var(--ink);
+  }
+
+  .faq-item.open .faq-toggle {
+    background: var(--gold);
+    border-color: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #555;
+  }
+
+  .faq-item.open .faq-a { max-height: 200px; padding-bottom: 1.5rem; }
+
+  /* ── FOOTER CTA ── */
+  .footer-cta {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: center;
+    padding: 8rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .footer-cta::before {
+    content: 'AI';
+    position: absolute;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 30vw;
+    font-weight: 800;
+    color: rgba(255,255,255,0.02);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .footer-cta h2 {
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .footer-cta h2 em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    font-weight: 400;
+  }
+
+  .footer-cta p {
+    font-size: 1.1rem;
+    color: rgba(245,240,232,0.6);
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .footer-cta .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    font-size: 1rem;
+    padding: 1.2rem 3rem;
+    position: relative;
+  }
+
+  .footer-cta .btn-primary:hover { background: var(--gold-light); }
+
+  footer {
+    background: #050505;
+    color: rgba(245,240,232,0.3);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 1rem 2rem; }
+    section { padding: 4rem 2rem; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .hero-left { padding: 6rem 2rem 4rem; }
+    .problem, .benefits, .cta-section, .faq { grid-template-columns: 1fr; gap: 3rem; }
+    .solution-grid { grid-template-columns: 1fr; }
+    .sol-card { border-right: none; border-bottom: 2px solid var(--ink); }
+    .testi-grid { grid-template-columns: 1fr; }
+    .curriculum-inner { grid-template-columns: 1fr; }
+    .curriculum { padding: 4rem 2rem; }
+    .benefits-sticky { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AI<span>Business</span>Lab</div>
+  <a href="http://www.binhcotsong.com" class="nav-cta">Đăng Ký Ngay</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Khóa học thực chiến · 2025</div>
+    <h1>Ứng dụng AI<br>để <em>bùng nổ</em><br>doanh thu online</h1>
+    <p class="hero-sub">Học cách sử dụng trí tuệ nhân tạo để tự động hóa, tối ưu và tăng trưởng kinh doanh online — ngay cả khi bạn không có nền tảng kỹ thuật.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">2,400<span>+</span></div>
+        <div class="stat-label">Học viên</div>
+      </div>
+      <div>
+        <div class="stat-num">4.9<span>★</span></div>
+        <div class="stat-label">Đánh giá</div>
+      </div>
+      <div>
+        <div class="stat-num">30<span>x</span></div>
+        <div class="stat-label">ROI trung bình</div>
+      </div>
+    </div>
+    <div class="hero-cta-group">
+      <a href="http://www.binhcotsong.com" class="btn-primary">Tham Gia Ngay</a>
+      <button class="btn-ghost" onclick="document.getElementById('curriculum').scrollIntoView({behavior:'smooth'})">Xem chương trình →</button>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-grid-pattern"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-circle"></div>
+      <div class="hero-center-icon">🤖</div>
+      <div class="floating-card fc-1">
+        <strong>+340%</strong>
+        Doanh thu tháng 3 của Minh H.
+      </div>
+      <div class="floating-card fc-2">
+        <strong>8 giờ/ngày</strong>
+        tiết kiệm nhờ tự động hóa AI
+      </div>
+      <div class="floating-card fc-3">
+        <strong>Live 24/7</strong>
+        Chatbot AI chốt đơn thay bạn
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div>
+    <div class="section-tag">Thực Trạng</div>
+    <h2 class="section-title" style="color:var(--cream)">Bạn đang <em>tụt hậu</em><br>mà không hay?</h2>
+    <ul class="problem-list">
+      <li class="problem-item">
+        <span class="prob-icon">😰</span>
+        <div class="prob-text">
+          <strong>Làm mãi mà không lớn được</strong>
+          <p>Bạn làm việc 12-14 giờ/ngày nhưng doanh thu vẫn dậm chân tại chỗ, không biết đâu là "nút thắt" cần giải quyết.</p>
+        </div>
+      </li>
+      <li class="problem-item">
+        <span class="prob-icon">📉</span>
+        <div class="prob-text">
+          <strong>Đối thủ bỏ xa dù bạn cố gắng hơn</strong>
+          <p>Trong khi bạn đang tự làm tất cả mọi thứ, đối thủ đã dùng AI để tự động hóa và tăng quy mô gấp 5 lần.</p>
+        </div>
+      </li>
+      <li class="problem-item">
+        <span class="prob-icon">🤯</span>
+        <div class="prob-text">
+          <strong>Nghe AI nhiều mà không biết bắt đầu từ đâu</strong>
+          <p>ChatGPT, Gemini, Midjourney… quá nhiều công cụ nhưng không biết ứng dụng thực tế vào kinh doanh như thế nào.</p>
+        </div>
+      </li>
+      <li class="problem-item">
+        <span class="prob-icon">💸</span>
+        <div class="prob-text">
+          <strong>Chi phí vận hành ngày càng đắt đỏ</strong>
+          <p>Nhân sự, content, quảng cáo — mọi thứ đều tăng giá, trong khi biên lợi nhuận ngày càng co lại.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="problem-right reveal">
+    <p class="big-quote">"Không phải AI sẽ thay thế bạn — mà là <em>người dùng AI</em> sẽ thay thế bạn."</p>
+    <p class="problem-p">Theo McKinsey, các doanh nghiệp ứng dụng AI đang tăng trưởng nhanh hơn 3.4 lần so với đối thủ chưa ứng dụng. Khoảng cách này đang nới rộng từng tháng.</p>
+    <p class="problem-p">Câu hỏi không phải là <em>có nên dùng AI hay không</em>, mà là bạn sẽ bắt đầu <em>hôm nay hay tiếp tục trễ hơn nữa?</em></p>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution">
+  <div class="section-tag">Giải Pháp</div>
+  <h2 class="section-title">Hệ thống AI kinh doanh<br>hoàn chỉnh <em>cho bạn</em></h2>
+  <p style="margin-top:1rem;color:#555;max-width:600px;line-height:1.7">Khóa học được thiết kế theo hướng thực chiến — mỗi bài học đều có bài tập áp dụng ngay vào doanh nghiệp của bạn.</p>
+  <div class="solution-grid reveal">
+    <div class="sol-card">
+      <div class="sol-num">01</div>
+      <div class="sol-icon">🎯</div>
+      <div class="sol-title">AI cho Marketing & Content</div>
+      <p class="sol-desc">Tạo content hàng loạt, cá nhân hóa quảng cáo, tối ưu SEO và xây dựng phễu bán hàng tự động bằng AI.</p>
+    </div>
+    <div class="sol-card">
+      <div class="sol-num">02</div>
+      <div class="sol-icon">🤖</div>
+      <div class="sol-title">Chatbot AI Chốt Đơn 24/7</div>
+      <p class="sol-desc">Xây dựng chatbot thông minh tư vấn, chăm sóc khách hàng và chốt đơn tự động — không cần code.</p>
+    </div>
+    <div class="sol-card">
+      <div class="sol-num">03</div>
+      <div class="sol-icon">⚡</div>
+      <div class="sol-title">Tự Động Hóa Quy Trình</div>
+      <p class="sol-desc">Kết nối các công cụ AI để tự động hóa vận hành: xử lý đơn hàng, email marketing, báo cáo và hơn thế.</p>
+    </div>
+    <div class="sol-card">
+      <div class="sol-num">04</div>
+      <div class="sol-icon">📊</div>
+      <div class="sol-title">Phân Tích Dữ Liệu Thông Minh</div>
+      <p class="sol-desc">Dùng AI để phân tích hành vi khách hàng, dự đoán xu hướng và đưa ra quyết định kinh doanh dựa trên dữ liệu.</p>
+    </div>
+    <div class="sol-card">
+      <div class="sol-num">05</div>
+      <div class="sol-icon">🖼️</div>
+      <div class="sol-title">AI Visual & Creative</div>
+      <p class="sol-desc">Tạo hình ảnh sản phẩm, video quảng cáo và tài liệu thiết kế chuyên nghiệp chỉ trong vài phút.</p>
+    </div>
+    <div class="sol-card">
+      <div class="sol-num">06</div>
+      <div class="sol-icon">🚀</div>
+      <div class="sol-title">Chiến Lược Mở Rộng Quy Mô</div>
+      <p class="sol-desc">Xây dựng lộ trình scale kinh doanh với AI — từ $0 đến $10K/tháng và từ $10K lên $100K/tháng.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="benefits-sticky">
+    <div class="section-tag">Lợi Ích</div>
+    <h2 class="section-title">Điều bạn<br><em>thực sự</em><br>nhận được</h2>
+    <p style="margin-top:1rem;color:#555;line-height:1.7;font-size:0.95rem">Không chỉ là kiến thức — mà là kết quả cụ thể, đo lường được, có thể áp dụng ngay ngày hôm nay.</p>
+  </div>
+  <div class="benefits-list reveal">
+    <div class="benefit-row">
+      <div class="ben-num">01</div>
+      <div class="ben-content">
+        <strong>Tiết kiệm 30-50 giờ làm việc mỗi tuần</strong>
+        <p>Tự động hóa những công việc lặp đi lặp lại như viết content, trả lời email, xử lý đơn hàng — để bạn tập trung vào chiến lược.</p>
+        <span class="ben-tag">Tự Động Hóa</span>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="ben-num">02</div>
+      <div class="ben-content">
+        <strong>Tăng doanh thu 200-400% trong 90 ngày</strong>
+        <p>Học viên trung bình tăng doanh thu gấp 2-4 lần sau 3 tháng áp dụng hệ thống AI vào kinh doanh của họ.</p>
+        <span class="ben-tag">Tăng Trưởng</span>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="ben-num">03</div>
+      <div class="ben-content">
+        <strong>Giảm chi phí vận hành 40-60%</strong>
+        <p>Thay thế nhiều vị trí nhân sự bằng AI — từ customer service, content creator đến data analyst.</p>
+        <span class="ben-tag">Tiết Kiệm Chi Phí</span>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="ben-num">04</div>
+      <div class="ben-content">
+        <strong>Hệ thống bán hàng hoạt động 24/7</strong>
+        <p>Chatbot AI tư vấn và chốt đơn ngay cả khi bạn đang ngủ — không bao giờ bỏ lỡ một khách hàng tiềm năng nào.</p>
+        <span class="ben-tag">Doanh Thu Thụ Động</span>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="ben-num">05</div>
+      <div class="ben-content">
+        <strong>Lợi thế cạnh tranh bền vững</strong>
+        <p>Trong khi đối thủ còn đang tìm hiểu AI, bạn đã có hệ thống hoàn chỉnh và đang bỏ xa họ mỗi tháng.</p>
+        <span class="ben-tag">Cạnh Tranh</span>
+      </div>
+    </div>
+    <div class="benefit-row">
+      <div class="ben-num">06</div>
+      <div class="ben-content">
+        <strong>Cộng đồng doanh nhân AI toàn quốc</strong>
+        <p>Kết nối với hơn 2,400 doanh nhân đang ứng dụng AI — chia sẻ chiến lược, đối tác và cơ hội kinh doanh.</p>
+        <span class="ben-tag">Cộng Đồng</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testi-header">
+    <div>
+      <div class="section-tag">Chứng Thực</div>
+      <h2 class="section-title" style="color:var(--cream)">Kết quả <em>thực tế</em><br>từ học viên</h2>
+    </div>
+    <div style="text-align:right">
+      <div style="font-family:'Be Vietnam Pro',sans-serif;font-size:3rem;font-weight:800;color:var(--gold)">4.9★</div>
+      <div style="color:rgba(245,240,232,0.5);font-size:0.85rem">Từ 2,400+ đánh giá</div>
+    </div>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi-card featured">
+      <div class="stars">★★★★★</div>
+      <p class="testi-quote">"Sau 2 tháng học, tôi đã xây dựng được chatbot AI chốt đơn tự động. Doanh thu tăng gần gấp 4 và tôi làm việc ít hơn 60%."</p>
+      <div class="testi-result">+380%</div>
+      <div class="testi-result-label">Tăng doanh thu trong 60 ngày</div>
+      <div class="testi-author">
+        <div class="author-avatar">MH</div>
+        <div>
+          <div class="author-name">Minh Hoàng</div>
+          <div class="author-role">Chủ shop thời trang online, HCM</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars" style="color:var(--gold)">★★★★★</div>
+      <p class="testi-quote">"Khóa học thực tế nhất tôi từng tham gia. Ngày đầu tiên tôi đã có thể dùng AI tạo content cho cả tuần chỉ trong 1 giờ."</p>
+      <div class="testi-result" style="color:var(--gold)">70 giờ/tháng</div>
+      <div class="testi-result-label" style="color:rgba(245,240,232,0.4)">Tiết kiệm thời gian làm content</div>
+      <div class="testi-author">
+        <div class="author-avatar" style="background:var(--sage);color:white">TL</div>
+        <div>
+          <div class="author-name">Thu Linh</div>
+          <div class="author-role">Founder mỹ phẩm handmade, Hà Nội</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars" style="color:var(--gold)">★★★★★</div>
+      <p class="testi-quote">"Tôi không có background kỹ thuật nhưng vẫn xây được hệ thống AI hoàn chỉnh. Mentor hỗ trợ tận tình 24/7."</p>
+      <div class="testi-result" style="color:var(--gold)">45 triệu</div>
+      <div class="testi-result-label" style="color:rgba(245,240,232,0.4)">Doanh thu tháng đầu tiên áp dụng</div>
+      <div class="testi-author">
+        <div class="author-avatar" style="background:var(--rust);color:white">QD</div>
+        <div>
+          <div class="author-name">Quốc Dũng</div>
+          <div class="author-role">Kinh doanh phụ kiện xe, Đà Nẵng</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars" style="color:var(--gold)">★★★★★</div>
+      <p class="testi-quote">"Đầu tư tốt nhất tôi từng làm cho doanh nghiệp. Chỉ sau 3 tuần, chi phí quảng cáo giảm 40% trong khi conversion tăng gấp đôi."</p>
+      <div class="testi-result" style="color:var(--gold)">2× Conversion</div>
+      <div class="testi-result-label" style="color:rgba(245,240,232,0.4)">Tỷ lệ chốt đơn tăng</div>
+      <div class="testi-author">
+        <div class="author-avatar" style="background:#5a4b7a;color:white">NA</div>
+        <div>
+          <div class="author-name">Ngọc Anh</div>
+          <div class="author-role">Dropship & Affiliate, HCM</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars" style="color:var(--gold)">★★★★★</div>
+      <p class="testi-quote">"Giảng viên giải thích rất dễ hiểu, có ví dụ thực tế cho từng ngành. Cộng đồng học viên cũng cực kỳ hữu ích."</p>
+      <div class="testi-result" style="color:var(--gold)">5 nhân sự AI</div>
+      <div class="testi-result-label" style="color:rgba(245,240,232,0.4)">Thay thế bằng hệ thống tự động</div>
+      <div class="testi-author">
+        <div class="author-avatar" style="background:#4b5a7a;color:white">BK</div>
+        <div>
+          <div class="author-name">Bảo Khánh</div>
+          <div class="author-role">Chủ agency digital marketing</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars" style="color:var(--gold)">★★★★★</div>
+      <p class="testi-quote">"ROI của khóa học là hơn 50 lần. Số tiền bỏ ra học tôi thu lại chỉ trong tuần đầu tiên áp dụng."</p>
+      <div class="testi-result" style="color:var(--gold)">50× ROI</div>
+      <div class="testi-result-label" style="color:rgba(245,240,232,0.4)">Hoàn vốn trong 7 ngày</div>
+      <div class="testi-author">
+        <div class="author-avatar" style="background:#7a4b4b;color:white">PT</div>
+        <div>
+          <div class="author-name">Phúc Thịnh</div>
+          <div class="author-role">Kinh doanh TPCN, Cần Thơ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum" id="curriculum">
+  <div class="curriculum-inner">
+    <div>
+      <div class="section-tag">Chương Trình</div>
+      <h2 class="section-title">6 module<br><em>thực chiến</em></h2>
+      <p style="margin-top:1rem;color:#555;font-size:0.9rem;line-height:1.7">40+ bài học video · Tài liệu thực hành · Live Q&A hàng tuần · Hỗ trợ 12 tháng</p>
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--ink);color:var(--cream)">
+        <div style="font-family:'Be Vietnam Pro',sans-serif;font-size:0.75rem;letter-spacing:0.1em;color:var(--gold);text-transform:uppercase;margin-bottom:0.5rem">Cam Kết</div>
+        <p style="font-size:0.88rem;line-height:1.7;color:rgba(245,240,232,0.7)">Nếu sau 30 ngày bạn không thấy kết quả, chúng tôi hoàn tiền 100% — không cần giải thích.</p>
+      </div>
+    </div>
+    <div class="modules reveal">
+      <div class="module">
+        <div class="module-num">MODULE 01</div>
+        <div>
+          <div class="module-title">Nền Tảng AI Cho Người Kinh Doanh</div>
+          <p class="module-desc">Hiểu AI hoạt động như thế nào, công cụ nào phù hợp với ngành của bạn và cách xây dựng tư duy AI-first.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">MODULE 02</div>
+        <div>
+          <div class="module-title">AI Marketing & Content Factory</div>
+          <p class="module-desc">Xây dựng hệ thống tạo content 10X — bài đăng, video script, email campaign, quảng cáo chỉ trong vài click.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">MODULE 03</div>
+        <div>
+          <div class="module-title">Chatbot AI & Sales Automation</div>
+          <p class="module-desc">Thiết kế chatbot tư vấn thông minh, tích hợp Zalo/Facebook/Website và tự động hóa quy trình chốt đơn.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">MODULE 04</div>
+        <div>
+          <div class="module-title">AI Workflow & Operations</div>
+          <p class="module-desc">Tự động hóa vận hành với Make/Zapier + AI, xây dựng dashboard real-time và hệ thống báo cáo thông minh.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">MODULE 05</div>
+        <div>
+          <div class="module-title">AI Data & Customer Intelligence</div>
+          <p class="module-desc">Phân tích hành vi mua hàng, dự đoán nhu cầu và cá nhân hóa trải nghiệm khách hàng bằng AI.</p>
+        </div>
+      </div>
+      <div class="module">
+        <div class="module-num">MODULE 06</div>
+        <div>
+          <div class="module-title">Scale & Dominate Your Market</div>
+          <p class="module-desc">Chiến lược mở rộng quy mô với AI — từ solopreneur lên team, từ local lên nationwide trong 6-12 tháng.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / PRICING -->
+<section class="cta-section" id="enroll">
+  <div>
+    <div class="section-tag">Đăng Ký</div>
+    <h2 class="section-title">Bắt đầu hành trình<br><em>AI của bạn</em><br>hôm nay</h2>
+    <p style="margin-top:1.5rem;font-size:1rem;line-height:1.8;color:#555;max-width:480px">Mỗi ngày trì hoãn là mỗi ngày đối thủ bỏ xa bạn thêm. Hơn 2,400 doanh nhân đã bắt đầu — bạn thì sao?</p>
+    <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem;">
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span style="font-size:1.5rem">⏰</span>
+        <div>
+          <div style="font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:0.9rem">Ưu đãi Early Bird — Còn 48 giờ</div>
+          <div style="font-size:0.82rem;color:#888">Sau đó giá trở về 4.990.000đ</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:1rem;align-items:center">
+        <span style="font-size:1.5rem">👥</span>
+        <div>
+          <div style="font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:0.9rem">Còn 47 suất trong đợt này</div>
+          <div style="font-size:0.82rem;color:#888">Giới hạn để đảm bảo chất lượng hỗ trợ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="price-card reveal">
+    <div class="price-badge">🔥 Ưu đãi ra mắt — Tiết kiệm 60%</div>
+    <div class="price-original">4.990.000đ</div>
+    <div class="price-main"><sup>đ</sup>1.990.000</div>
+    <div class="price-note">Thanh toán một lần · Trọn đời truy cập</div>
+    <ul class="price-includes">
+      <li>40+ bài học video chất lượng cao</li>
+      <li>6 module thực chiến có bài tập</li>
+      <li>Template & Prompt AI sẵn dùng (trị giá 500K)</li>
+      <li>Live Q&A hàng tuần với giảng viên</li>
+      <li>Cộng đồng học viên hỗ trợ 24/7</li>
+      <li>Cập nhật miễn phí trọn đời</li>
+      <li>Certificate hoàn thành khóa học</li>
+      <li>1 buổi tư vấn 1-1 với mentor (30 phút)</li>
+    </ul>
+    <button class="btn-gold">Đăng Ký Ngay — Chỉ 1.990.000đ</button>
+    <button style="width:100%;background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--cream);padding:0.9rem;font-family:'Be Vietnam Pro',sans-serif;font-size:0.85rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">Xem Demo Miễn Phí Trước →</button>
+    <div class="guarantee">
+      <div class="guarantee-icon">🛡️</div>
+      <div class="guarantee-text">
+        <strong>Bảo đảm hoàn tiền 30 ngày</strong>
+        Nếu bạn không hài lòng vì bất kỳ lý do gì, chúng tôi hoàn tiền 100% — không hỏi thêm.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div>
+    <div class="section-tag">FAQ</div>
+    <h2 class="section-title">Câu hỏi<br><em>thường gặp</em></h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Tôi không có kiến thức kỹ thuật, có học được không?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Hoàn toàn được! Khóa học được thiết kế cho người kinh doanh, không phải kỹ sư. 90% học viên của chúng tôi không có nền tảng kỹ thuật. Chúng tôi hướng dẫn từng bước, sử dụng công cụ kéo-thả, không cần code.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Khóa học phù hợp với ngành nào?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Phù hợp với tất cả ngành kinh doanh online: thương mại điện tử, dropship, affiliate, dịch vụ, coaching, agency, bán lẻ truyền thống muốn online hóa... Chúng tôi có case study riêng cho từng ngành.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Mất bao lâu để thấy kết quả?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Nhiều học viên thấy kết quả ngay trong tuần đầu tiên (tiết kiệm thời gian làm content). Kết quả về doanh thu thường xuất hiện sau 30-60 ngày áp dụng đầy đủ hệ thống. Chúng tôi cam kết hỗ trợ đến khi bạn đạt được mục tiêu.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Chi phí công cụ AI hàng tháng là bao nhiêu?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Chúng tôi ưu tiên giới thiệu công cụ miễn phí hoặc chi phí thấp (dưới 500K/tháng). Nhiều công cụ có gói free đủ dùng. Khóa học sẽ dạy bạn cách tối ưu chi phí và chỉ trả tiền khi thực sự cần thiết.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Sau khi mua có được hỗ trợ không?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Bạn được hỗ trợ trong cộng đồng học viên 24/7, live Q&A hàng tuần và 1 buổi tư vấn 1-1 với mentor. Ngoài ra, bạn nhận cập nhật miễn phí trọn đời khi có công cụ AI mới.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Tôi có thể học theo tốc độ của mình không?
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Hoàn toàn được. Tất cả video có thể xem lại bất cứ lúc nào, không có deadline. Bạn có thể học vào buổi tối, cuối tuần — theo lịch trình phù hợp với bạn nhất.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER CTA -->
+<section class="footer-cta">
+  <h2>Đừng để thêm một tháng nữa<br>trôi qua <em>mà không có AI</em></h2>
+  <p>Hơn 2,400 doanh nhân đã bắt đầu. Bước tiếp theo là của bạn.</p>
+  <a href="http://www.binhcotsong.com" class="btn-primary">Đăng Ký Ngay — Chỉ 1.990.000đ</a>
+  <div style="margin-top:1.5rem;font-size:0.85rem;color:rgba(245,240,232,0.3)">✓ Bảo đảm hoàn tiền 30 ngày &nbsp;·&nbsp; ✓ Truy cập trọn đời &nbsp;·&nbsp; ✓ Hỗ trợ 24/7</div>
+</section>
+
+<footer>
+  © 2025 AIBusinessLab. Mọi quyền được bảo lưu. · <a href="#" style="color:inherit">Chính sách bảo mật</a> · <a href="#" style="color:inherit">Điều khoản dịch vụ</a>
+</footer>
+
+<script>
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Smooth nav on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.1)' : 'none';
+  });
+</script>
+</body>
+</html>
